@@ -4,15 +4,13 @@
 //using namespace sf;
 
 #define FPS 60.0f
+#define SCREEN_WIDTH  680
+#define SCREEN_HEIGHT 680
 
 int main()
 {
-
-  	// vectors to initialize dimensions
-  	sf::Vector2i screenDimensions(640,480);
-
-  	// Create window [object?]
-  	sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
+  	// Create window // the style makes it so you can't resize the window
+  	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
     // Game Loop
     while (window.isOpen())
@@ -36,7 +34,6 @@ int main()
             }
             break;
         }
-
       }
 
       // Sleep to free up resources
@@ -47,8 +44,5 @@ int main()
 
       // Draw everything here>>>
       window.display();		// redraws the display
-
-
-
     }
 }
