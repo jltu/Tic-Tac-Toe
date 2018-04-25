@@ -1,17 +1,21 @@
-//  Title: Player.hpp
+//  Title: Piece.hpp
 //  Created: 4/24/18
 
 #include <iostream>
 #include <SFML/Graphics>
 
-class Player
+class Piece
 {
 protected:
 
-
+  //kdjs;adkfl 
 
 
 
 
 public:
+
+
+  //write some code here
+
 }
