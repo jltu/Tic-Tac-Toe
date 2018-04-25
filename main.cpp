@@ -11,20 +11,39 @@
 #define BOARD_WIDTH 467
 #define BOARD_LENGTH 466
 
+#define BOARD_SCALE .33
+
+#define SPACE 80
 
 int main()
 {
   	// Create window // the style makes it so you can't resize the window
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
+
+
+
+
+    // The boards
     sf::Texture grid;
-  	if (!bTexture.loadFromFile("res/images/Grid.png"))
+  	if (!grid.loadFromFile("res/images/Grid.png"))
   		std::cout << "ERROR: Could not load Board" << std::endl;
 
-  	sf::Sprite board;				// Declares board
-  	board.setScale(1,1);			// Scales width and height
-  	board.setTexture(grid);				// assigns texture to the sprite
-  	board.setPosition(SCREEN_WIDTH/2 - BOARD_WIDTH/2, SCREEN_HEIGHT/2 - BOARD_LENGTH/2);	// centers sprite
+  	sf::Sprite b1;				// Centered Board
+  	b1.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
+  	b1.setTexture(grid);				// assigns texture to the sprite
+  	b1.setPosition(SCREEN_WIDTH/2 - (BOARD_WIDTH*BOARD_SCALE)/2, SCREEN_HEIGHT/2 - (BOARD_LENGTH*BOARD_SCALE)/2);	// positions sprite
+
+    sf::Sprite b2;				// Declares board
+  	b2.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
+  	b2.setTexture(grid);				// assigns texture to the sprite
+  	b2.setPosition(SPACE, SPACE);	// positions sprite
+
+    sf::Sprite b3;				// Declares board
+    b3.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
+    b3.setTexture(grid);				// assigns texture to the sprite
+    b3.setPosition(SCREEN_WIDTH/2 + BOARD_WIDTH*BOARD_SCALE/5 + SPACE, SCREEN_HEIGHT - BOARD_LENGTH*BOARD_SCALE + SPACE);	// positions sprite
+
 
     // Game Loop
     while (window.isOpen())
@@ -56,8 +75,12 @@ int main()
       // Clear window before drawing
       window.clear(sf::Color(187,225,254));		// redraws background
 
+
       // Draw everything here>>>
-      window.draw(board);
+      //window.draw(menu);
+      window.draw(b1);
+      window.draw(b2);
+      window.draw(b3);
       window.display();		// redraws the display
 
 
