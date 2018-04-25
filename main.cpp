@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <DEFINITIONS.hpp>
 //using namespace std;
 //using namespace sf;
 
@@ -12,25 +11,49 @@
 
 #define BOARD_SCALE .33
 
-#define BOARD_WIDTH 467*BOARD_SCALE
+#define BOARD_WIDTH 466*BOARD_SCALE
 #define BOARD_LENGTH 466*BOARD_SCALE
-
-#define BOARD_SCALE .33
 
 #define SPACE 60
 
+#define X_WIDTH 160*BOARD_SCALE
+#define X_LENGTH 160*BOARD_SCALE
+
+#define O_WIDTH 160*BOARD_SCALE
+#define O_WIDTH 160*BOARD_SCALE
 
 int main()
 {
   	// Create window // the style makes it so you can't resize the window
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
+
+    ///// O Texture
+    sf::Texture otexture;
+    otexture.loadFromFile("res/images/O.png");
+
+    // O Piece on middle board
+    sf::Sprite opiece;
+    opiece.setScale(BOARD_SCALE,BOARD_SCALE);
+    opiece.setTexture(otexture);
+    opiece.setPosition(SCREEN_WIDTH/2 - (BOARD_WIDTH)/2 - 2, SCREEN_HEIGHT/2 - (BOARD_LENGTH)/2 - 2);
+
+    // opiece on first and second boards
+    // the -2 is needed to center the Piece
+    // work in progress
+
+    // b1
+    //opiece.setPosition(SCREEN_WIDTH - BOARD_WIDTH - SPACE - 2, SCREEN_HEIGHT - BOARD_LENGTH - SPACE - 2);
+
+    // b3
+    //opiece.setPosition(SPACE - 2, SPACE - 2);
+
+
     // Grid Texture
     sf::Texture grid;
-  	if (!grid.loadFromFile("res/images/Grid.png"))
-  		std::cout << "ERROR: Could not load Board" << std::endl;
+  	grid.loadFromFile("res/images/Grid.png");
 
-    // Top-Left Board
+    // // Top-Left Board
   	sf::Sprite b1;                            // Declares Sprite
   	b1.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
   	b1.setTexture(grid);				              // Assigns texture to the sprite
@@ -49,6 +72,8 @@ int main()
     b3.setPosition(SCREEN_WIDTH - BOARD_WIDTH - SPACE, SCREEN_HEIGHT - BOARD_LENGTH - SPACE);
 
 
+
+
 //////////////////~~~~~~~~~ Game Loop  ~~~~~~~~~//////////////////
     while (window.isOpen())
     {
@@ -65,7 +90,7 @@ int main()
           case sf::Event::KeyPressed:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
-              std::cout << "See you next time" << std::endl;
+              std::cout << "shoots, brah" << std::endl;
               window.close();
             }
             break;
@@ -89,13 +114,10 @@ int main()
       window.draw(b3);
 
       // Draw the Pieces
-
+      window.draw(opiece);
 
 
       // Redraws the Display
       window.display();
-
-
-
     }
 }
