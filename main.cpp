@@ -8,12 +8,12 @@
 #define SCREEN_WIDTH  600
 #define SCREEN_HEIGHT 600
 
-#define BOARD_WIDTH 467
-#define BOARD_LENGTH 466
+#define BOARD_WIDTH 467*BOARD_SCALE
+#define BOARD_LENGTH 466*BOARD_SCALE
 
 #define BOARD_SCALE .33
 
-#define SPACE 80
+#define SPACE 60
 
 int main()
 {
@@ -32,17 +32,19 @@ int main()
   	sf::Sprite b1;				// Centered Board
   	b1.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
   	b1.setTexture(grid);				// assigns texture to the sprite
-  	b1.setPosition(SCREEN_WIDTH/2 - (BOARD_WIDTH*BOARD_SCALE)/2, SCREEN_HEIGHT/2 - (BOARD_LENGTH*BOARD_SCALE)/2);	// positions sprite
+  	b1.setPosition(SPACE, SPACE);	// positions sprite
 
     sf::Sprite b2;				// Declares board
   	b2.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
   	b2.setTexture(grid);				// assigns texture to the sprite
-  	b2.setPosition(SPACE, SPACE);	// positions sprite
+  	b2.setPosition(SCREEN_WIDTH/2 - (BOARD_WIDTH)/2, SCREEN_HEIGHT/2 - (BOARD_LENGTH)/2);	// centers sprite
 
     sf::Sprite b3;				// Declares board
     b3.setScale(BOARD_SCALE,BOARD_SCALE);			// Scales width and height
     b3.setTexture(grid);				// assigns texture to the sprite
-    b3.setPosition(SCREEN_WIDTH/2 + BOARD_WIDTH*BOARD_SCALE/5 + SPACE, SCREEN_HEIGHT - BOARD_LENGTH*BOARD_SCALE + SPACE);	// positions sprite
+    b3.setPosition(SCREEN_WIDTH - BOARD_WIDTH - SPACE, SCREEN_HEIGHT - BOARD_LENGTH - SPACE);	// positions sprite
+
+
 
 
     // Game Loop
