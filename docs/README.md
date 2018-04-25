@@ -6,3 +6,10 @@ Joseph was here!
 jjjjj
 sup
 lessgo
+
+
+## GameState ##
+- Rules
+- Board
+- Piece
+- Player
