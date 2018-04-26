@@ -7,5 +7,17 @@ main: main.o
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
 
+
+
+test: test.o
+	g++ test.o -o test $(LIBS)
+
+test.o: test.cpp
+	g++ -c test.cpp -o test.o
+
+
+
+
+
 clean: *.o
 	rm *.o
