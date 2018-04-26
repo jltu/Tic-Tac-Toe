@@ -114,6 +114,17 @@ int main()
       window.draw(b3);
 
       // Draw the Pieces
+      // // Init the Pieces
+      // int gridArray[3][3]
+      // for (int i = 0; i < 3; i++)
+      // {
+      //
+      // //   for (int j = 0; j < 3; i++)
+      // //   {
+      // //     gridArray[i][j]
+      // //     window.draw(opiece);
+      // //   }
+      // }
       window.draw(opiece);
 
 
