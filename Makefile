@@ -9,11 +9,11 @@ main.o: main.cpp
 
 
 
-test: test.o
-	g++ test.o -o test $(LIBS)
+test: /tst/test.o
+	g++ tst/test.o -o test $(LIBS)
 
-test.o: test.cpp
-	g++ -c test.cpp -o test.o
+test.o: /tst/test.cpp
+	g++ -c tst/test.cpp -o /tst/test.o
 
 
 
