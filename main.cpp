@@ -121,6 +121,60 @@ int main()
               window.close();
             }
             break;
+////////////////////////<<<<<< Mouse Input [class and functions] >>>>>>>//////////////////////////////
+          case sf::Event::MouseButtonReleased:
+          {
+            if (event.mouseButton.button == sf::Mouse::Left)
+            {
+              sf::Vector2i mpos = sf::Mouse::getPosition(window);
+
+              // Debug statement
+              std::cout << "mpos:" << "(" << mpos.x << "," << mpos.y << std::endl;
+
+
+            // First board only [i guess an inheritance thing will be going on for each board]
+
+              // Check which column
+              if (mpos.x > b1.getPosition().x && mpos.x < b1.getPosition().x + BOARD_WIDTH/3) // First Column
+              {
+                col = 1;
+                std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+              }
+              else if (mpos.x > b1.getPosition().x + BOARD_WIDTH/3 && mpos.x < b1.getPosition().x + 2*BOARD_WIDTH/3) // Second Column
+              {
+                col = 2;
+                std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+              }
+              else if (mpos.x > b1.getPosition().x + 2*BOARD_WIDTH/3 && mpos.x < b1.getPosition().x + BOARD_WIDTH) // Third Column
+              {
+                col = 3;
+                std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+              }
+
+              // Check which row
+              if (mpos.y > b1.getPosition().y && mpos.y < b1.getPosition().y + BOARD_LENGTH/3) // First row
+              {
+                row = 1;
+                std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+              }
+              else if (mpos.y > b1.getPosition().y + BOARD_LENGTH/3 && mpos.y < b1.getPosition().y + 2*BOARD_LENGTH/3) // Second row
+              {
+                row = 2;
+                std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+              }
+              else if (mpos.y > b1.getPosition().y + 2*BOARD_LENGTH/3 && mpos.y < b1.getPosition().y + BOARD_LENGTH) // Third row
+              {
+                row = 3;
+                std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+              }
+
+
+              std::cout << "(" << col << "," << row << ")" << std::endl;
+              o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+
+            }
+            break;
+          }
         }
       }
 
@@ -166,55 +220,7 @@ int main()
         }
       }
 
-  /// Mouse selection [work in progress]
-      if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-      {
-        sf::Vector2i mpos = sf::Mouse::getPosition(window);
 
-        // Debug statement
-        std::cout << "mpos:" << "(" << mpos.x << "," << mpos.y << std::endl;
-
-
-      // First board only [i guess an inheritance thing will be going on for each board]
-        // Check which column
-        if (mpos.x > b1.getPosition().x && mpos.x < b1.getPosition().x + BOARD_WIDTH/3) // First Column
-        {
-          col = 1;
-          std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-        }
-        else if (mpos.x > b1.getPosition().x + BOARD_WIDTH/3 && mpos.x < b1.getPosition().x + 2*BOARD_WIDTH/3) // Second Column
-        {
-          col = 2;
-          std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-        }
-        else if (mpos.x > b1.getPosition().x + 2*BOARD_WIDTH/3 && mpos.x < b1.getPosition().x + BOARD_WIDTH) // Third Column
-        {
-          col = 3;
-          std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-        }
-
-        // Check which row
-        if (mpos.y > b1.getPosition().y && mpos.y < b1.getPosition().y + BOARD_LENGTH/3) // First row
-        {
-          row = 1;
-          std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-        }
-        else if (mpos.y > b1.getPosition().y + BOARD_LENGTH/3 && mpos.y < b1.getPosition().y + 2*BOARD_LENGTH/3) // Second row
-        {
-          row = 2;
-          std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-        }
-        else if (mpos.y > b1.getPosition().y + 2*BOARD_LENGTH/3 && mpos.y < b1.getPosition().y + BOARD_LENGTH) // Third row
-        {
-          row = 3;
-          std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-        }
-
-
-        std::cout << "(" << col << "," << row << ")" << std::endl;
-        o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-
-      }
 
 
 
