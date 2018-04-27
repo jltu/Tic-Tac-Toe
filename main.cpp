@@ -20,7 +20,7 @@
 
 int main()
 {
-  	// Create window // the style makes it so you can't resize the window
+    // Create window // the style makes it so you can't resize the window
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
 ////////////////////////<<<<<< PLAYER [class] >>>>>>>//////////////////////////////
@@ -92,7 +92,7 @@ int turncount(1);
       {
         o2[x][y].setScale(BSCALE,BSCALE);
         o2[x][y].setTexture(otexture);
-        o2[x][y].setColor(sf::Color(255, 255, 255, 255));
+        o2[x][y].setColor(sf::Color(255, 255, 255, 0));
         o2[x][y].setPosition(b2.getPosition().x + (PSIZE * x) - 2, b2.getPosition().y + (PSIZE * y) - 2);
       }
     }
@@ -104,7 +104,7 @@ int turncount(1);
       {
         o3[x][y].setScale(BSCALE,BSCALE);
         o3[x][y].setTexture(otexture);
-        o3[x][y].setColor(sf::Color(255, 255, 255, 255));
+        o3[x][y].setColor(sf::Color(255, 255, 255, 0));
         o3[x][y].setPosition(b3.getPosition().x + (PSIZE * x) - 2, b3.getPosition().y + (PSIZE * y) - 2);
       }
     }
@@ -179,22 +179,131 @@ int turncount(1);
                 }
 
 
-              // Change Pieces Based on Turncount
-              std::cout << "(" << col << "," << row << ")" << std::endl;
-              o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-              if (turncount % 2 == 1)
-              {
-                o1[col-1][row-1].setTexture(xtexture);    // If player1
-                turncount++;
+                // Change Pieces Based on Turncount
+                std::cout << "(" << col << "," << row << ")" << std::endl;
+                o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                if (turncount % 2 == 1)
+                {
+                  o1[col-1][row-1].setTexture(xtexture);    // If player1
+                  turncount++;
+                }
+                else if (turncount % 2 == 0)
+                {
+                  o1[col-1][row-1].setTexture(otexture);    // If player2
+                  turncount++;
+                }
               }
-              else if (turncount % 2 == 0)
+
+
+
+            ////////////////////////////////////////////////////////////////
+              if (mpos.x > b2.getPosition().x && mpos.x < b2.getPosition().x + BSIZE && mpos.y > b2.getPosition().y && mpos.y < b2.getPosition().y + BSIZE)
               {
-                o1[col-1][row-1].setTexture(otexture);    // If player2
-                turncount++;
+                // Check which column
+                if (mpos.x < b2.getPosition().x + BSIZE/3) // First Column
+                {
+                  col = 1;
+                  std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.x > b2.getPosition().x + BSIZE/3 && mpos.x < b2.getPosition().x + 2*BSIZE/3) // Second Column
+                {
+                  col = 2;
+                  std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.x > b2.getPosition().x + 2*BSIZE/3) // Third Column
+                {
+                  col = 3;
+                  std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+
+                // Check which row
+                if (mpos.y < b2.getPosition().y + BSIZE/3) // First row
+                {
+                  row = 1;
+                  std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.y > b2.getPosition().y + BSIZE/3 && mpos.y < b2.getPosition().y + 2*BSIZE/3) // Second row
+                {
+                  row = 2;
+                  std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.y > b2.getPosition().y + 2*BSIZE/3) // Third row
+                {
+                  row = 3;
+                  std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+
+
+                // Change Pieces Based on Turncount
+                std::cout << "(" << col << "," << row << ")" << std::endl;
+                o2[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                if (turncount % 2 == 1)
+                {
+                  o2[col-1][row-1].setTexture(xtexture);    // If player1
+                  turncount++;
+                }
+                else if (turncount % 2 == 0)
+                {
+                  o2[col-1][row-1].setTexture(otexture);    // If player2
+                  turncount++;
+                }
+              }
+
+              /////////////////////////////////////////////////////////////////
+              if (mpos.x > b3.getPosition().x && mpos.x < b3.getPosition().x + BSIZE && mpos.y > b3.getPosition().y && mpos.y < b3.getPosition().y + BSIZE)
+              {
+                // Check which column
+                if (mpos.x < b3.getPosition().x + BSIZE/3) // First Column
+                {
+                  col = 1;
+                  std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.x > b3.getPosition().x + BSIZE/3 && mpos.x < b3.getPosition().x + 2*BSIZE/3) // Second Column
+                {
+                  col = 2;
+                  std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.x > b3.getPosition().x + 2*BSIZE/3) // Third Column
+                {
+                  col = 3;
+                  std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+
+                // Check which row
+                if (mpos.y < b3.getPosition().y + BSIZE/3) // First row
+                {
+                  row = 1;
+                  std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.y > b3.getPosition().y + BSIZE/3 && mpos.y < b3.getPosition().y + 2*BSIZE/3) // Second row
+                {
+                  row = 2;
+                  std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+                else if (mpos.y > b3.getPosition().y + 2*BSIZE/3) // Third row
+                {
+                  row = 3;
+                  std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                }
+
+
+                // Change Pieces Based on Turncount
+                std::cout << "(" << col << "," << row << ")" << std::endl;
+                o3[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                if (turncount % 2 == 1)
+                {
+                  o3[col-1][row-1].setTexture(xtexture);    // If player1
+                  turncount++;
+                }
+                else if (turncount % 2 == 0)
+                {
+                  o3[col-1][row-1].setTexture(otexture);    // If player2
+                  turncount++;
+                }
               }
             }
-          }
             break;
+            
           }
         }
       }
@@ -240,6 +349,14 @@ int turncount(1);
             window.draw(o3[x][y]);
         }
       }
+
+
+
+
+
+
+
+
 
 
 
