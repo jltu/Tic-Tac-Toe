@@ -20,7 +20,7 @@
 
 int main()
 {
-  	// Create window // the style makes it so you can't resize the window
+    // Create window // the style makes it so you can't resize the window
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
 ////////////////////////<<<<<< PLAYER [class] >>>>>>>//////////////////////////////
@@ -92,7 +92,7 @@ int turncount(1);
       {
         o2[x][y].setScale(BSCALE,BSCALE);
         o2[x][y].setTexture(otexture);
-        o2[x][y].setColor(sf::Color(255, 255, 255, 255));
+        o2[x][y].setColor(sf::Color(255, 255, 255, 0));
         o2[x][y].setPosition(b2.getPosition().x + (PSIZE * x) - 2, b2.getPosition().y + (PSIZE * y) - 2);
       }
     }
@@ -104,7 +104,7 @@ int turncount(1);
       {
         o3[x][y].setScale(BSCALE,BSCALE);
         o3[x][y].setTexture(otexture);
-        o3[x][y].setColor(sf::Color(255, 255, 255, 255));
+        o3[x][y].setColor(sf::Color(255, 255, 255, 0));
         o3[x][y].setPosition(b3.getPosition().x + (PSIZE * x) - 2, b3.getPosition().y + (PSIZE * y) - 2);
       }
     }
@@ -178,6 +178,14 @@ int turncount(1);
             window.draw(o3[x][y]);
         }
       }
+
+
+
+
+
+
+
+
 
 
 
