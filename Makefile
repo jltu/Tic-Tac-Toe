@@ -9,13 +9,6 @@ main.o: main.cpp
 
 
 
-test: test.o
-	g++ test.o -o test $(LIBS)
-
-test.o: test.cpp
-	g++ -c test.cpp -o test.o
-
-
 
 
 
