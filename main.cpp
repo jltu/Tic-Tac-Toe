@@ -107,7 +107,7 @@ int main()
                         }
 ////////////////////////<<<<<< Running Game  >>>>>>>//////////////////////////////
                         else if(gameStart)
-                        {   
+                        {   //takes in resbut, window, mpos, gamelogic, board 
                             if (resbut.getGlobalBounds().contains(window.mapPixelToCoords(mpos)))
                             //if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x +
                             // RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
