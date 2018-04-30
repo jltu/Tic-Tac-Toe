@@ -107,7 +107,9 @@ int main()
                 {
                     if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x + RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
                     {
+                        board.reset_game();
                         std::cout << "restart clicked" << std::endl;
+
                         //Clear boards
                         b1.clear();
                         std::cout << "b1 reset" << std::endl;
@@ -119,7 +121,6 @@ int main()
                         // Bottom Board (b3)
                         b3.clear();
                         std::cout << "b3 reset" << std::endl;
-
                     }
 
                   // First board only [i guess an inheritance thing will be going on for each board]

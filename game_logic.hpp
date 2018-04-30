@@ -47,4 +47,5 @@ public:
     int check_win();
     void change_player_turn();
     int check_current_player();
+    void reset_game();
 };

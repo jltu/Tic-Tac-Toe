@@ -82,3 +82,14 @@ int GameLogic::check_current_player()
         return 2;
     }
 }
+
+void GameLogic::reset_game()
+{
+      gameOver = 0;
+      playerOneTurn = 1;
+      playerTwoTurn = 0;
+      for (int i = 0; i <27; i++)
+      {
+          gameBoard[i] = 0;
+      }
+}
