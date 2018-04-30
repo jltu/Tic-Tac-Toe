@@ -1,8 +1,9 @@
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system
 
-main: main.o
-	g++ main.o -o main $(LIBS)
+main: main.o game_logic.o
+	g++ main.o game_logic.o -o main $(LIBS)
 
+game_logic.o: game_logic.hpp
 
 # source file dependencies
 

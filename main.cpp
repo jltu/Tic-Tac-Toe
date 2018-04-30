@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "game_logic.hpp"
 //using namespace std;
 //using namespace sf;
 
@@ -24,7 +25,7 @@ int main()
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
 ////////////////////////<<<<<< PLAYER [class] >>>>>>>//////////////////////////////
-int turncount(1);
+//int turncount(1);
 
 
 
@@ -109,7 +110,8 @@ int turncount(1);
       }
     }
 
-
+    //Initialize game logic
+    GameLogic board;
 
 //////////////////~~~~~~~~~ Game Loop  ~~~~~~~~~//////////////////
     while (window.isOpen())
@@ -186,19 +188,22 @@ int turncount(1);
                 }
 
 
-                // Change Pieces Based on Turncount
-                std::cout << "(" << col << "," << row << ")" << std::endl;
-                o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-                if (turncount % 2 == 1)
-                {
-                  o1[col-1][row-1].setTexture(xtexture);    // If player1
-                  turncount++;
-                }
-                else if (turncount % 2 == 0)
-                {
-                  o1[col-1][row-1].setTexture(otexture);    // If player2
-                  turncount++;
-                }
+                
+                  if(board.check_box(map_index) == 0)
+                  {
+                      // Change Pieces Based on Turncount
+                      std::cout << "(" << col << "," << row << ")" << std::endl;
+                      o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                      if (board.check_current_player() == 1)
+                    {
+                      o1[col-1][row-1].setTexture(xtexture);    // If player1
+                    }
+                    else if (board.check_current_player() == 2)
+                    {
+                      o1[col-1][row-1].setTexture(otexture);    // If player2
+                    }
+                      board.change_player_turn();
+                  }
               }
 
 
@@ -244,21 +249,25 @@ int turncount(1);
                     map_index += 2;
                   std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
+                  
 
+                  if(board.check_box(map_index) == 0)
+                  {
 
-                // Change Pieces Based on Turncount
-                std::cout << "(" << col << "," << row << ")" << std::endl;
-                o2[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-                if (turncount % 2 == 1)
-                {
-                  o2[col-1][row-1].setTexture(xtexture);    // If player1
-                  turncount++;
-                }
-                else if (turncount % 2 == 0)
-                {
-                  o2[col-1][row-1].setTexture(otexture);    // If player2
-                  turncount++;
-                }
+                    // Change Pieces Based on Turncount
+                    std::cout << "(" << col << "," << row << ")" << std::endl;
+                    o2[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                    if (board.check_current_player() == 1)
+                    {
+                      o2[col-1][row-1].setTexture(xtexture);    // If player1
+                    }
+                    else if (board.check_current_player() == 2)
+                    {
+                      o2[col-1][row-1].setTexture(otexture);    // If player2
+                    }
+                      board.change_player_turn();
+                  }
+                  
               }
 
               /////////////////////////////////////////////////////////////////
@@ -303,22 +312,29 @@ int turncount(1);
                   std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
-
-                // Change Pieces Based on Turncount
-                std::cout << "(" << col << "," << row << ")" << std::endl;
-                o3[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-                if (turncount % 2 == 1)
-                {
-                  o3[col-1][row-1].setTexture(xtexture);    // If player1
-                  turncount++;
-                }
-                else if (turncount % 2 == 0)
-                {
-                  o3[col-1][row-1].setTexture(otexture);    // If player2
-                  turncount++;
-                }
+                  if(board.check_box(map_index) == 0)
+                  {
+                    // Change Pieces Based on Turncount
+                    std::cout << "(" << col << "," << row << ")" << std::endl;
+                    o3[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                    if (board.check_current_player() == 1)
+                    {
+                      o3[col-1][row-1].setTexture(xtexture);    // If player1
+                      
+                    }
+                    else if (board.check_current_player() == 2)
+                    {
+                      o3[col-1][row-1].setTexture(otexture);    // If player2
+                      
+                    }
+                      board.change_player_turn();
+                  }
               }
                 std::cout<<map_index<<std::endl;
+                board.update_Box(map_index);
+                std::cout<<board.check_win()<<std::endl;
+                
+                
                 
             }
             break;

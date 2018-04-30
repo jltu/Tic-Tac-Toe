@@ -1,8 +1,10 @@
 #include <iostream>
 class GameLogic {
 private:
-    int gameBoard[27];
-    bool gameOver = 0;
+    int gameBoard[27] = {};
+    bool gameOver;
+    bool playerOneTurn;
+    bool playerTwoTurn;
     /* board representation
      (bottom)    (mid)        (top)
      level 1        level 2        level 3
@@ -42,7 +44,9 @@ private:
     
 public:
     GameLogic();
-    void update_Board(int board[27]);
+    void update_Box(int map_index);
     int check_box(int map_index);
     int check_win();
+    void change_player_turn();
+    int check_current_player();
 };
