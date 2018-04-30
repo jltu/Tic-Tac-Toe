@@ -162,6 +162,9 @@ int main()
                   if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x + RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
                     {
                       std::cout << "restart clicked" << std::endl;
+						          board.reset_game();
+
+
                           //Clear boards
                       for (int x = 0; x < 3; x++)
                       {
@@ -402,7 +405,6 @@ int main()
 
 // <<<<<<<<<<<<< Draw everything here >>>>>>>>>>>>>>>
             if(gameStart == false){
-                   std::cout << "Game Start = false" << std::endl;
                    window.draw(sTitle);
             }
 

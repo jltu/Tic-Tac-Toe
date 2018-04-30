@@ -31,12 +31,12 @@ int GameLogic::check_win()
 
             return 1; //player 1 win
         }
-        
+
         if((gameBoard[m_scoring[i][0]] == 2) && (gameBoard[m_scoring[i][1]] == 2)  && (gameBoard[m_scoring[i][2]] == 2))
         {
             std::cout<< m_scoring[i][0] <<","<< m_scoring[i][1] << "," << m_scoring[i][2]<<std::endl;
             return -1;//player 2 win
-            
+
 
         }
     }
@@ -47,7 +47,7 @@ int GameLogic::check_win()
             return 0;// continue game
         }
     }
-    
+
     return 2; // game tied
 }
 void GameLogic::change_player_turn()
@@ -73,4 +73,15 @@ int GameLogic::check_current_player()
     {
         return 2;
     }
+}
+void GameLogic::reset_game()
+{
+      gameOver = 0;
+      playerOneTurn = 1;
+      playerTwoTurn = 0;
+      for (int i = 0; i <27; i++)
+      {
+          gameBoard[i] = 0;
+
+      }
 }
