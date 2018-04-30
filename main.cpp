@@ -98,6 +98,7 @@ int main()
 
                         // Debug statement
                         std::cout << "mpos:" << "(" << mpos.x << "," << mpos.y << std::endl;
+
 ////////////////////////<<<<<< LOADING SCREEN >>>>>>>//////////////////////////////
                         if(gameStart == false) //if clicked title page, load game
                         {
@@ -106,9 +107,10 @@ int main()
                         }
 ////////////////////////<<<<<< Running Game  >>>>>>>//////////////////////////////
                         else if(gameStart)
-                        {
-                            if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x +
-                             RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
+                        {   
+                            if (resbut.getGlobalBounds().contains(window.mapPixelToCoords(mpos)))
+                            //if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x +
+                            // RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
                             {   //if restart button pressed, clear boards and reset board logic
                                 board.reset_game();
                                 std::cout << "restart clicked" << std::endl;
