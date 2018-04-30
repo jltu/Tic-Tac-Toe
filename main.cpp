@@ -177,234 +177,238 @@ int main()
               // Debug statement
               std::cout << "mpos:" << "(" << mpos.x << "," << mpos.y << std::endl;
 ////////////////////////<<<<<< LOADING SCREEN >>>>>>>//////////////////////////////
-              std::cout << "Set to TRUE" << std::endl;
-                    gameStart = true;
-////////////////////////<<<<<< RESET button  >>>>>>>//////////////////////////////
-              if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x + RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
+                if(gameStart == false)
                 {
-                  std::cout << "restart clicked" << std::endl;
-                      //Clear boards
+                  std::cout << "Set to TRUE" << std::endl;
+                        gameStart = true;
+                }
+////////////////////////<<<<<< RESET button  >>>>>>>//////////////////////////////
+                else if(gameStart){
+                  if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x + RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
+                    {
+                      std::cout << "restart clicked" << std::endl;
+                          //Clear boards
+                      for (int x = 0; x < 3; x++)
+                      {
+                        for (int y = 0; y < 3; y++)
+                      {
+                       o1[x][y].setColor(sf::Color(255, 255, 255, 0));
+                       std::cout << "b1 reset" << std::endl;
+                      }
+                    }
+                    // Middle Board (b2)
                   for (int x = 0; x < 3; x++)
                   {
                     for (int y = 0; y < 3; y++)
-                  {
-                   o1[x][y].setColor(sf::Color(255, 255, 255, 0));
-                   std::cout << "b1 reset" << std::endl;
+                    {
+                      o2[x][y].setColor(sf::Color(255, 255, 255, 0));
+                      std::cout << "b2 reset" << std::endl;
+                    }
                   }
-                }
-                // Middle Board (b2)
-              for (int x = 0; x < 3; x++)
-              {
-                for (int y = 0; y < 3; y++)
-                {
-                  o2[x][y].setColor(sf::Color(255, 255, 255, 0));
-                  std::cout << "b2 reset" << std::endl;
-                }
-              }
-              // Bottom Board (b3)
-              for (int x = 0; x < 3; x++)
-              {
-                for (int y = 0; y < 3; y++)
-                {
-                 o3[x][y].setColor(sf::Color(255, 255, 255, 0));
-                 std::cout << "b3 reset" << std::endl;
-                }
-              }
-
-          }
-
-              // First board only [i guess an inheritance thing will be going on for each board]
-              if (mpos.x > b1.getPosition().x && mpos.x < b1.getPosition().x + BSIZE && mpos.y > b1.getPosition().y && mpos.y < b1.getPosition().y + BSIZE)
-              {
-
-                // Check which column
-                if (mpos.x < b1.getPosition().x + BSIZE/3) // First Column
-                {
-                  col = 1;
-                  std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.x > b1.getPosition().x + BSIZE/3 && mpos.x < b1.getPosition().x + 2*BSIZE/3) // Second Column
-                {
-                  col = 2;
-                    map_index += 9;
-                  std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.x > b1.getPosition().x + 2*BSIZE/3) // Third Column
-                {
-                  col = 3;
-                    map_index += 18;
-                  std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-
-                // Check which row
-                if (mpos.y < b1.getPosition().y + BSIZE/3) // First row
-                {
-                  row = 1;
-                  std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.y > b1.getPosition().y + BSIZE/3 && mpos.y < b1.getPosition().y + 2*BSIZE/3) // Second row
-                {
-                  row = 2;
-                    map_index += 1;
-                  std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.y > b1.getPosition().y + 2*BSIZE/3) // Third row
-                {
-                  row = 3;
-                    map_index += 2;
-                  std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-
-
-
-                  if(board.check_box(map_index) == 0)
+                  // Bottom Board (b3)
+                  for (int x = 0; x < 3; x++)
                   {
-                      // Change Pieces Based on Turncount
-                      std::cout << "(" << col << "," << row << ")" << std::endl;
-                      o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-                      if (board.check_current_player() == 1)
+                    for (int y = 0; y < 3; y++)
                     {
-                      o1[col-1][row-1].setTexture(xtexture);    // If player1
+                     o3[x][y].setColor(sf::Color(255, 255, 255, 0));
+                     std::cout << "b3 reset" << std::endl;
                     }
-                    else if (board.check_current_player() == 2)
-                    {
-                      o1[col-1][row-1].setTexture(otexture);    // If player2
-                    }
-                      board.update_Box(map_index);
-                      board.change_player_turn();
-                  }
-              }
-
-
-
-            ////////////////////////////////////////////////////////////////
-              if (mpos.x > b2.getPosition().x && mpos.x < b2.getPosition().x + BSIZE && mpos.y > b2.getPosition().y && mpos.y < b2.getPosition().y + BSIZE)
-              {
-                  map_index += 3;
-                // Check which column
-                if (mpos.x < b2.getPosition().x + BSIZE/3) // First Column
-                {
-                  col = 1;
-                  std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.x > b2.getPosition().x + BSIZE/3 && mpos.x < b2.getPosition().x + 2*BSIZE/3) // Second Column
-                {
-                  col = 2;
-                    map_index += 9;
-                  std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.x > b2.getPosition().x + 2*BSIZE/3) // Third Column
-                {
-                  col = 3;
-                    map_index += 18;
-                  std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-
-                // Check which row
-                if (mpos.y < b2.getPosition().y + BSIZE/3) // First row
-                {
-                  row = 1;
-                  std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.y > b2.getPosition().y + BSIZE/3 && mpos.y < b2.getPosition().y + 2*BSIZE/3) // Second row
-                {
-                  row = 2;
-                    map_index += 1;
-                  std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.y > b2.getPosition().y + 2*BSIZE/3) // Third row
-                {
-                  row = 3;
-                    map_index += 2;
-                  std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-
-
-                  if(board.check_box(map_index) == 0)
-                  {
-
-                    // Change Pieces Based on Turncount
-                    std::cout << "(" << col << "," << row << ")" << std::endl;
-                    o2[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-                    if (board.check_current_player() == 1)
-                    {
-                      o2[col-1][row-1].setTexture(xtexture);    // If player1
-                    }
-                    else if (board.check_current_player() == 2)
-                    {
-                      o2[col-1][row-1].setTexture(otexture);    // If player2
-                    }
-                      board.update_Box(map_index);
-                      board.change_player_turn();
                   }
 
               }
 
-              /////////////////////////////////////////////////////////////////
-              if (mpos.x > b3.getPosition().x && mpos.x < b3.getPosition().x + BSIZE && mpos.y > b3.getPosition().y && mpos.y < b3.getPosition().y + BSIZE)
-              {
-                  map_index += 6;
-                // Check which column
-                if (mpos.x < b3.getPosition().x + BSIZE/3) // First Column
-                {
-                  col = 1;
-                  std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.x > b3.getPosition().x + BSIZE/3 && mpos.x < b3.getPosition().x + 2*BSIZE/3) // Second Column
-                {
-                  col = 2;
-                    map_index += 9;
-                  std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.x > b3.getPosition().x + 2*BSIZE/3) // Third Column
-                {
-                  col = 3;
-                    map_index += 18;
-                  std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-
-                // Check which row
-                if (mpos.y < b3.getPosition().y + BSIZE/3) // First row
-                {
-                  row = 1;
-                  std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.y > b3.getPosition().y + BSIZE/3 && mpos.y < b3.getPosition().y + 2*BSIZE/3) // Second row
-                {
-                  row = 2;
-                    map_index += 1;
-                  std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-                else if (mpos.y > b3.getPosition().y + 2*BSIZE/3) // Third row
-                {
-                  row = 3;
-                    map_index += 2;
-                  std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
-                }
-
-                  if(board.check_box(map_index) == 0)
+                  // First board only [i guess an inheritance thing will be going on for each board]
+                  if (mpos.x > b1.getPosition().x && mpos.x < b1.getPosition().x + BSIZE && mpos.y > b1.getPosition().y && mpos.y < b1.getPosition().y + BSIZE)
                   {
-                    // Change Pieces Based on Turncount
-                    std::cout << "(" << col << "," << row << ")" << std::endl;
-                    o3[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
-                    if (board.check_current_player() == 1)
-                    {
-                      o3[col-1][row-1].setTexture(xtexture);    // If player1
 
-                    }
-                    else if (board.check_current_player() == 2)
+                    // Check which column
+                    if (mpos.x < b1.getPosition().x + BSIZE/3) // First Column
                     {
-                      o3[col-1][row-1].setTexture(otexture);    // If player2
-
+                      col = 1;
+                      std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                      board.update_Box(map_index);
-                      board.change_player_turn();
+                    else if (mpos.x > b1.getPosition().x + BSIZE/3 && mpos.x < b1.getPosition().x + 2*BSIZE/3) // Second Column
+                    {
+                      col = 2;
+                        map_index += 9;
+                      std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.x > b1.getPosition().x + 2*BSIZE/3) // Third Column
+                    {
+                      col = 3;
+                        map_index += 18;
+                      std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+
+                    // Check which row
+                    if (mpos.y < b1.getPosition().y + BSIZE/3) // First row
+                    {
+                      row = 1;
+                      std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.y > b1.getPosition().y + BSIZE/3 && mpos.y < b1.getPosition().y + 2*BSIZE/3) // Second row
+                    {
+                      row = 2;
+                        map_index += 1;
+                      std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.y > b1.getPosition().y + 2*BSIZE/3) // Third row
+                    {
+                      row = 3;
+                        map_index += 2;
+                      std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+
+
+
+                      if(board.check_box(map_index) == 0)
+                      {
+                          // Change Pieces Based on Turncount
+                          std::cout << "(" << col << "," << row << ")" << std::endl;
+                          o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                          if (board.check_current_player() == 1)
+                        {
+                          o1[col-1][row-1].setTexture(xtexture);    // If player1
+                        }
+                        else if (board.check_current_player() == 2)
+                        {
+                          o1[col-1][row-1].setTexture(otexture);    // If player2
+                        }
+                          board.update_Box(map_index);
+                          board.change_player_turn();
+                      }
                   }
-              }
-                std::cout<<map_index<<std::endl;
 
-                std::cout<<board.check_win()<<std::endl;
 
+
+                ////////////////////////////////////////////////////////////////
+                  if (mpos.x > b2.getPosition().x && mpos.x < b2.getPosition().x + BSIZE && mpos.y > b2.getPosition().y && mpos.y < b2.getPosition().y + BSIZE)
+                  {
+                      map_index += 3;
+                    // Check which column
+                    if (mpos.x < b2.getPosition().x + BSIZE/3) // First Column
+                    {
+                      col = 1;
+                      std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.x > b2.getPosition().x + BSIZE/3 && mpos.x < b2.getPosition().x + 2*BSIZE/3) // Second Column
+                    {
+                      col = 2;
+                        map_index += 9;
+                      std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.x > b2.getPosition().x + 2*BSIZE/3) // Third Column
+                    {
+                      col = 3;
+                        map_index += 18;
+                      std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+
+                    // Check which row
+                    if (mpos.y < b2.getPosition().y + BSIZE/3) // First row
+                    {
+                      row = 1;
+                      std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.y > b2.getPosition().y + BSIZE/3 && mpos.y < b2.getPosition().y + 2*BSIZE/3) // Second row
+                    {
+                      row = 2;
+                        map_index += 1;
+                      std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.y > b2.getPosition().y + 2*BSIZE/3) // Third row
+                    {
+                      row = 3;
+                        map_index += 2;
+                      std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+
+
+                      if(board.check_box(map_index) == 0)
+                      {
+
+                        // Change Pieces Based on Turncount
+                        std::cout << "(" << col << "," << row << ")" << std::endl;
+                        o2[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                        if (board.check_current_player() == 1)
+                        {
+                          o2[col-1][row-1].setTexture(xtexture);    // If player1
+                        }
+                        else if (board.check_current_player() == 2)
+                        {
+                          o2[col-1][row-1].setTexture(otexture);    // If player2
+                        }
+                          board.update_Box(map_index);
+                          board.change_player_turn();
+                      }
+
+                  }
+
+                  /////////////////////////////////////////////////////////////////
+                  if (mpos.x > b3.getPosition().x && mpos.x < b3.getPosition().x + BSIZE && mpos.y > b3.getPosition().y && mpos.y < b3.getPosition().y + BSIZE)
+                  {
+                      map_index += 6;
+                    // Check which column
+                    if (mpos.x < b3.getPosition().x + BSIZE/3) // First Column
+                    {
+                      col = 1;
+                      std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.x > b3.getPosition().x + BSIZE/3 && mpos.x < b3.getPosition().x + 2*BSIZE/3) // Second Column
+                    {
+                      col = 2;
+                        map_index += 9;
+                      std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.x > b3.getPosition().x + 2*BSIZE/3) // Third Column
+                    {
+                      col = 3;
+                        map_index += 18;
+                      std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+
+                    // Check which row
+                    if (mpos.y < b3.getPosition().y + BSIZE/3) // First row
+                    {
+                      row = 1;
+                      std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.y > b3.getPosition().y + BSIZE/3 && mpos.y < b3.getPosition().y + 2*BSIZE/3) // Second row
+                    {
+                      row = 2;
+                        map_index += 1;
+                      std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+                    else if (mpos.y > b3.getPosition().y + 2*BSIZE/3) // Third row
+                    {
+                      row = 3;
+                        map_index += 2;
+                      std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                    }
+
+                      if(board.check_box(map_index) == 0)
+                      {
+                        // Change Pieces Based on Turncount
+                        std::cout << "(" << col << "," << row << ")" << std::endl;
+                        o3[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                        if (board.check_current_player() == 1)
+                        {
+                          o3[col-1][row-1].setTexture(xtexture);    // If player1
+
+                        }
+                        else if (board.check_current_player() == 2)
+                        {
+                          o3[col-1][row-1].setTexture(otexture);    // If player2
+
+                        }
+                          board.update_Box(map_index);
+                          board.change_player_turn();
+                      }
+                  }
+                    std::cout<<map_index<<std::endl;
+
+                    std::cout<<board.check_win()<<std::endl;
+                }
 
 
             }
