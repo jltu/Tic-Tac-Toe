@@ -1,7 +1,7 @@
 #include <iostream.h>
 class GameLogic {
 private:
-    int gameBoard [3][3][3];
+    int gameBoard [27];
     bool gameOver = 0;
     /* board representation
      (bottom)    (mid)        (top)
@@ -42,5 +42,6 @@ private:
     
 public:
     GameLogic();
+    
     void check_win();
 };
