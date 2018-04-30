@@ -17,5 +17,5 @@ void Board::draw(sf::RenderWindow &window)
 
 sf::Sprite Board::getBoard()
 {
-    return Board;
+    return board;
 }

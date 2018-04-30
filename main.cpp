@@ -1,26 +1,10 @@
-#include <SFML/Graphics.hpp>
 #include <iostream>
+
+#include <SFML/Graphics.hpp>
+#include "Definitions.hpp"
 #include "game_logic.hpp"
-//using namespace std;
-//using namespace sf;
+#include "Board.hpp"
 
-// Definitions can be moved to DEFINITIONS.hpp later on
-#define FPS 60.0f
-
-#define SCREEN_WIDTH  600
-#define SCREEN_HEIGHT 600
-
-#define BSCALE .33
-
-#define BSIZE 466*BSCALE
-#define BSIZE 466*BSCALE
-
-#define SPACE 60
-
-#define PSIZE 160*BSCALE
-
-#define RESTART_SCALE .125
-#define RESTART_SIZE 512*RESTART_SCALE
 
 int main()
 {
@@ -71,22 +55,13 @@ int main()
   	grid.loadFromFile("res/images/Grid.png");
 
     // Top-Left Board
-  	sf::Sprite b1;                            // Declares Sprite
-  	b1.setScale(BSCALE,BSCALE);			// Scales width and height
-  	b1.setTexture(grid);				              // Assigns texture to the sprite
-  	b1.setPosition(SPACE, SPACE);	            // Positions sprite
+  	Board b1(SPACE, SPACE);
 
     // Centered Board
-    sf::Sprite b2;
-  	b2.setScale(BSCALE,BSCALE);
-  	b2.setTexture(grid);
-  	b2.setPosition(SCREEN_WIDTH/2 - (BSIZE)/2, SCREEN_HEIGHT/2 - (BSIZE)/2);	// centers sprite
+    Board b2(SCREEN_WIDTH/2 - (BSIZE)/2, SCREEN_HEIGHT/2 - (BSIZE)/2);
 
     // Bottom-Right Board
-    sf::Sprite b3;
-    b3.setScale(BSCALE,BSCALE);
-    b3.setTexture(grid);
-    b3.setPosition(SCREEN_WIDTH - BSIZE - SPACE, SCREEN_HEIGHT - BSIZE - SPACE);
+    Board b3(SCREEN_WIDTH - BSIZE - SPACE, SCREEN_HEIGHT - BSIZE - SPACE);
 
 
 ////////////////////////<<<<<< O PIECE [class] >>>>>>>//////////////////////////////
@@ -114,7 +89,7 @@ int main()
         o1[x][y].setScale(BSCALE,BSCALE);
         o1[x][y].setTexture(otexture);
         o1[x][y].setColor(sf::Color(255, 255, 255, 0)); // Change last value to 0 in order to make pieces invisible
-        o1[x][y].setPosition(b1.getPosition().x + (PSIZE * x) - 2, b1.getPosition().y + (PSIZE * y) - 2);     // the -2 is needed to center the Piece
+        o1[x][y].setPosition(b1.getBoard().getPosition().x + (PSIZE * x) - 2, b1.getBoard().getPosition().y + (PSIZE * y) - 2);     // the -2 is needed to center the Piece
       }
     }
 
@@ -126,7 +101,7 @@ int main()
         o2[x][y].setScale(BSCALE,BSCALE);
         o2[x][y].setTexture(otexture);
         o2[x][y].setColor(sf::Color(255, 255, 255, 0));
-        o2[x][y].setPosition(b2.getPosition().x + (PSIZE * x) - 2, b2.getPosition().y + (PSIZE * y) - 2);
+        o2[x][y].setPosition(b2.getBoard().getPosition().x + (PSIZE * x) - 2, b2.getBoard().getPosition().y + (PSIZE * y) - 2);
       }
     }
 
@@ -138,7 +113,7 @@ int main()
         o3[x][y].setScale(BSCALE,BSCALE);
         o3[x][y].setTexture(otexture);
         o3[x][y].setColor(sf::Color(255, 255, 255, 0));
-        o3[x][y].setPosition(b3.getPosition().x + (PSIZE * x) - 2, b3.getPosition().y + (PSIZE * y) - 2);
+        o3[x][y].setPosition(b3.getBoard().getPosition().x + (PSIZE * x) - 2, b3.getBoard().getPosition().y + (PSIZE * y) - 2);
       }
     }
 
@@ -218,22 +193,22 @@ int main()
               }
 
                   // First board only [i guess an inheritance thing will be going on for each board]
-                  if (mpos.x > b1.getPosition().x && mpos.x < b1.getPosition().x + BSIZE && mpos.y > b1.getPosition().y && mpos.y < b1.getPosition().y + BSIZE)
+                  if (mpos.x > b1.getBoard().getPosition().x && mpos.x < b1.getBoard().getPosition().x + BSIZE && mpos.y > b1.getBoard().getPosition().y && mpos.y < b1.getBoard().getPosition().y + BSIZE)
                   {
 
                     // Check which column
-                    if (mpos.x < b1.getPosition().x + BSIZE/3) // First Column
+                    if (mpos.x < b1.getBoard().getPosition().x + BSIZE/3) // First Column
                     {
                       col = 1;
                       std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.x > b1.getPosition().x + BSIZE/3 && mpos.x < b1.getPosition().x + 2*BSIZE/3) // Second Column
+                    else if (mpos.x > b1.getBoard().getPosition().x + BSIZE/3 && mpos.x < b1.getBoard().getPosition().x + 2*BSIZE/3) // Second Column
                     {
                       col = 2;
                         map_index += 9;
                       std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.x > b1.getPosition().x + 2*BSIZE/3) // Third Column
+                    else if (mpos.x > b1.getBoard().getPosition().x + 2*BSIZE/3) // Third Column
                     {
                       col = 3;
                         map_index += 18;
@@ -241,18 +216,18 @@ int main()
                     }
 
                     // Check which row
-                    if (mpos.y < b1.getPosition().y + BSIZE/3) // First row
+                    if (mpos.y < b1.getBoard().getPosition().y + BSIZE/3) // First row
                     {
                       row = 1;
                       std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.y > b1.getPosition().y + BSIZE/3 && mpos.y < b1.getPosition().y + 2*BSIZE/3) // Second row
+                    else if (mpos.y > b1.getBoard().getPosition().y + BSIZE/3 && mpos.y < b1.getBoard().getPosition().y + 2*BSIZE/3) // Second row
                     {
                       row = 2;
                         map_index += 1;
                       std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.y > b1.getPosition().y + 2*BSIZE/3) // Third row
+                    else if (mpos.y > b1.getBoard().getPosition().y + 2*BSIZE/3) // Third row
                     {
                       row = 3;
                         map_index += 2;
@@ -282,22 +257,22 @@ int main()
 
 
                 ////////////////////////////////////////////////////////////////
-                  if (mpos.x > b2.getPosition().x && mpos.x < b2.getPosition().x + BSIZE && mpos.y > b2.getPosition().y && mpos.y < b2.getPosition().y + BSIZE)
+                  if (mpos.x > b2.getBoard().getPosition().x && mpos.x < b2.getBoard().getPosition().x + BSIZE && mpos.y > b2.getBoard().getPosition().y && mpos.y < b2.getBoard().getPosition().y + BSIZE)
                   {
                       map_index += 3;
                     // Check which column
-                    if (mpos.x < b2.getPosition().x + BSIZE/3) // First Column
+                    if (mpos.x < b2.getBoard().getPosition().x + BSIZE/3) // First Column
                     {
                       col = 1;
                       std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.x > b2.getPosition().x + BSIZE/3 && mpos.x < b2.getPosition().x + 2*BSIZE/3) // Second Column
+                    else if (mpos.x > b2.getBoard().getPosition().x + BSIZE/3 && mpos.x < b2.getBoard().getPosition().x + 2*BSIZE/3) // Second Column
                     {
                       col = 2;
                         map_index += 9;
                       std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.x > b2.getPosition().x + 2*BSIZE/3) // Third Column
+                    else if (mpos.x > b2.getBoard().getPosition().x + 2*BSIZE/3) // Third Column
                     {
                       col = 3;
                         map_index += 18;
@@ -305,18 +280,18 @@ int main()
                     }
 
                     // Check which row
-                    if (mpos.y < b2.getPosition().y + BSIZE/3) // First row
+                    if (mpos.y < b2.getBoard().getPosition().y + BSIZE/3) // First row
                     {
                       row = 1;
                       std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.y > b2.getPosition().y + BSIZE/3 && mpos.y < b2.getPosition().y + 2*BSIZE/3) // Second row
+                    else if (mpos.y > b2.getBoard().getPosition().y + BSIZE/3 && mpos.y < b2.getBoard().getPosition().y + 2*BSIZE/3) // Second row
                     {
                       row = 2;
                         map_index += 1;
                       std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.y > b2.getPosition().y + 2*BSIZE/3) // Third row
+                    else if (mpos.y > b2.getBoard().getPosition().y + 2*BSIZE/3) // Third row
                     {
                       row = 3;
                         map_index += 2;
@@ -345,22 +320,22 @@ int main()
                   }
 
                   /////////////////////////////////////////////////////////////////
-                  if (mpos.x > b3.getPosition().x && mpos.x < b3.getPosition().x + BSIZE && mpos.y > b3.getPosition().y && mpos.y < b3.getPosition().y + BSIZE)
+                  if (mpos.x > b3.getBoard().getPosition().x && mpos.x < b3.getBoard().getPosition().x + BSIZE && mpos.y > b3.getBoard().getPosition().y && mpos.y < b3.getBoard().getPosition().y + BSIZE)
                   {
                       map_index += 6;
                     // Check which column
-                    if (mpos.x < b3.getPosition().x + BSIZE/3) // First Column
+                    if (mpos.x < b3.getBoard().getPosition().x + BSIZE/3) // First Column
                     {
                       col = 1;
                       std::cout << "col1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.x > b3.getPosition().x + BSIZE/3 && mpos.x < b3.getPosition().x + 2*BSIZE/3) // Second Column
+                    else if (mpos.x > b3.getBoard().getPosition().x + BSIZE/3 && mpos.x < b3.getBoard().getPosition().x + 2*BSIZE/3) // Second Column
                     {
                       col = 2;
                         map_index += 9;
                       std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.x > b3.getPosition().x + 2*BSIZE/3) // Third Column
+                    else if (mpos.x > b3.getBoard().getPosition().x + 2*BSIZE/3) // Third Column
                     {
                       col = 3;
                         map_index += 18;
@@ -368,18 +343,18 @@ int main()
                     }
 
                     // Check which row
-                    if (mpos.y < b3.getPosition().y + BSIZE/3) // First row
+                    if (mpos.y < b3.getBoard().getPosition().y + BSIZE/3) // First row
                     {
                       row = 1;
                       std::cout << "row1:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.y > b3.getPosition().y + BSIZE/3 && mpos.y < b3.getPosition().y + 2*BSIZE/3) // Second row
+                    else if (mpos.y > b3.getBoard().getPosition().y + BSIZE/3 && mpos.y < b3.getBoard().getPosition().y + 2*BSIZE/3) // Second row
                     {
                       row = 2;
                         map_index += 1;
                       std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
-                    else if (mpos.y > b3.getPosition().y + 2*BSIZE/3) // Third row
+                    else if (mpos.y > b3.getBoard().getPosition().y + 2*BSIZE/3) // Third row
                     {
                       row = 3;
                         map_index += 2;
@@ -436,9 +411,9 @@ int main()
                   window.draw(resbut);
 
                   // Draw the Grids [function]
-                  window.draw(b1);
-                  window.draw(b2);
-                  window.draw(b3);
+                  b1.draw(window);
+                  b2.draw(window);
+                  b3.draw(window);
 
               /// Initialize the Pieces [function]
                   // Top Board (b1)
