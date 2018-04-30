@@ -1,4 +1,4 @@
-#include <iostream.h>
+#include <iostream>
 class GameLogic {
 private:
     int gameBoard[27];
@@ -42,7 +42,7 @@ private:
     
 public:
     GameLogic();
-    void update_Board(int &board[27]);
+    void update_Board(int board[27]);
     int check_box(int map_index);
     int check_win();
 };
