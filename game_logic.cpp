@@ -27,14 +27,14 @@ int GameLogic::check_win()
     {
         if((gameBoard[m_scoring[i][0]] == 1) && (gameBoard[m_scoring[i][1]] == 1)  && (gameBoard[m_scoring[i][2]] == 1))
         {
-            std::cout<< m_scoring[i][1] <<","<<m_scoring[i][2] << "," << m_scoring[i][3]<<std::endl;
+            std::cout<< m_scoring[i][0] <<","<<m_scoring[i][1] << "," << m_scoring[i][2]<<std::endl;
 
             return 1; //player 1 win
         }
         
         if((gameBoard[m_scoring[i][0]] == 2) && (gameBoard[m_scoring[i][1]] == 2)  && (gameBoard[m_scoring[i][2]] == 2))
         {
-            std::cout<< m_scoring[i][1] <<","<< m_scoring[i][2] << "," << m_scoring[i][3]<<std::endl;
+            std::cout<< m_scoring[i][0] <<","<< m_scoring[i][1] << "," << m_scoring[i][2]<<std::endl;
             return -1;//player 2 win
             
 
