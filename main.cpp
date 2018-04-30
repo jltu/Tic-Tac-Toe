@@ -202,6 +202,7 @@ int main()
                     {
                       o1[col-1][row-1].setTexture(otexture);    // If player2
                     }
+                      board.update_Box(map_index);
                       board.change_player_turn();
                   }
               }
@@ -265,6 +266,7 @@ int main()
                     {
                       o2[col-1][row-1].setTexture(otexture);    // If player2
                     }
+                      board.update_Box(map_index);
                       board.change_player_turn();
                   }
                   
@@ -327,11 +329,12 @@ int main()
                       o3[col-1][row-1].setTexture(otexture);    // If player2
                       
                     }
+                      board.update_Box(map_index);
                       board.change_player_turn();
                   }
               }
                 std::cout<<map_index<<std::endl;
-                board.update_Box(map_index);
+                
                 std::cout<<board.check_win()<<std::endl;
                 
                 
