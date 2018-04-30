@@ -132,10 +132,12 @@ int turncount(1);
             }
             break;
 ////////////////////////<<<<<< Mouse Input [class and functions] >>>>>>>//////////////////////////////
+                
           case sf::Event::MouseButtonReleased:
           {
             if (event.mouseButton.button == sf::Mouse::Left)
             {
+                int map_index = 0;
               sf::Vector2i mpos = sf::Mouse::getPosition(window);
 
               // Debug statement
@@ -144,6 +146,7 @@ int turncount(1);
               // First board only [i guess an inheritance thing will be going on for each board]
               if (mpos.x > b1.getPosition().x && mpos.x < b1.getPosition().x + BSIZE && mpos.y > b1.getPosition().y && mpos.y < b1.getPosition().y + BSIZE)
               {
+                  
                 // Check which column
                 if (mpos.x < b1.getPosition().x + BSIZE/3) // First Column
                 {
@@ -153,11 +156,13 @@ int turncount(1);
                 else if (mpos.x > b1.getPosition().x + BSIZE/3 && mpos.x < b1.getPosition().x + 2*BSIZE/3) // Second Column
                 {
                   col = 2;
+                    map_index += 3;
                   std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
                 else if (mpos.x > b1.getPosition().x + 2*BSIZE/3) // Third Column
                 {
                   col = 3;
+                    map_index += 6;
                   std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
@@ -170,11 +175,13 @@ int turncount(1);
                 else if (mpos.y > b1.getPosition().y + BSIZE/3 && mpos.y < b1.getPosition().y + 2*BSIZE/3) // Second row
                 {
                   row = 2;
+                    map_index += 1;
                   std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
                 else if (mpos.y > b1.getPosition().y + 2*BSIZE/3) // Third row
                 {
                   row = 3;
+                    map_index += 2
                   std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
@@ -199,6 +206,7 @@ int turncount(1);
             ////////////////////////////////////////////////////////////////
               if (mpos.x > b2.getPosition().x && mpos.x < b2.getPosition().x + BSIZE && mpos.y > b2.getPosition().y && mpos.y < b2.getPosition().y + BSIZE)
               {
+                  map_index += 9;
                 // Check which column
                 if (mpos.x < b2.getPosition().x + BSIZE/3) // First Column
                 {
@@ -208,11 +216,13 @@ int turncount(1);
                 else if (mpos.x > b2.getPosition().x + BSIZE/3 && mpos.x < b2.getPosition().x + 2*BSIZE/3) // Second Column
                 {
                   col = 2;
+                    map_index += 3;
                   std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
                 else if (mpos.x > b2.getPosition().x + 2*BSIZE/3) // Third Column
                 {
                   col = 3;
+                    map_index += 6;
                   std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
@@ -225,11 +235,13 @@ int turncount(1);
                 else if (mpos.y > b2.getPosition().y + BSIZE/3 && mpos.y < b2.getPosition().y + 2*BSIZE/3) // Second row
                 {
                   row = 2;
+                    map_index += 1;
                   std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
                 else if (mpos.y > b2.getPosition().y + 2*BSIZE/3) // Third row
                 {
                   row = 3;
+                    map_index += 2;
                   std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
@@ -252,6 +264,7 @@ int turncount(1);
               /////////////////////////////////////////////////////////////////
               if (mpos.x > b3.getPosition().x && mpos.x < b3.getPosition().x + BSIZE && mpos.y > b3.getPosition().y && mpos.y < b3.getPosition().y + BSIZE)
               {
+                  map_index += 18;
                 // Check which column
                 if (mpos.x < b3.getPosition().x + BSIZE/3) // First Column
                 {
@@ -261,11 +274,13 @@ int turncount(1);
                 else if (mpos.x > b3.getPosition().x + BSIZE/3 && mpos.x < b3.getPosition().x + 2*BSIZE/3) // Second Column
                 {
                   col = 2;
+                    map_index += 3;
                   std::cout << "col2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
                 else if (mpos.x > b3.getPosition().x + 2*BSIZE/3) // Third Column
                 {
                   col = 3;
+                    map_index += 6;
                   std::cout << "col3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
@@ -278,11 +293,13 @@ int turncount(1);
                 else if (mpos.y > b3.getPosition().y + BSIZE/3 && mpos.y < b3.getPosition().y + 2*BSIZE/3) // Second row
                 {
                   row = 2;
+                    map_index += 1;
                   std::cout << "row2:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
                 else if (mpos.y > b3.getPosition().y + 2*BSIZE/3) // Third row
                 {
                   row = 3;
+                    map_index += 2;
                   std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                 }
 
@@ -301,6 +318,7 @@ int turncount(1);
                   turncount++;
                 }
               }
+                std::cout<<map_index<<std::endl;
             }
             break;
             
