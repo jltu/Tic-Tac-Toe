@@ -1,5 +1,9 @@
+#pragma once
+
 #include "game_logic.hpp"
-GameLogic::GameLogic(){
+
+GameLogic::GameLogic()
+{
     //gameBoard[27] = {0};
     gameOver = 0;
     playerOneTurn = 1;
@@ -17,10 +21,12 @@ void GameLogic::update_Box(int map_index)
         this->gameBoard[map_index] = 2;
     }
 }
+
 int GameLogic::check_box(int map_index)
 {
     return gameBoard[map_index];
 }
+
 int GameLogic::check_win()
 {
     for(int i = 0; i < 49; i++) // check which player win
@@ -31,12 +37,12 @@ int GameLogic::check_win()
 
             return 1; //player 1 win
         }
-        
+
         if((gameBoard[m_scoring[i][0]] == 2) && (gameBoard[m_scoring[i][1]] == 2)  && (gameBoard[m_scoring[i][2]] == 2))
         {
             std::cout<< m_scoring[i][0] <<","<< m_scoring[i][1] << "," << m_scoring[i][2]<<std::endl;
             return -1;//player 2 win
-            
+
 
         }
     }
@@ -47,9 +53,10 @@ int GameLogic::check_win()
             return 0;// continue game
         }
     }
-    
+
     return 2; // game tied
 }
+
 void GameLogic::change_player_turn()
 {
     if(playerOneTurn)
@@ -63,6 +70,7 @@ void GameLogic::change_player_turn()
         playerTwoTurn = 0;
     }
 }
+
 int GameLogic::check_current_player()
 {
     if(playerOneTurn)

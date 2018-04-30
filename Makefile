@@ -1,11 +1,13 @@
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system
 
-main: main.o game_logic.o Board.o
-	g++ main.o game_logic.o Board.o -o main $(LIBS)
+main: main.o game_logic.o Board.o Piece.o
+	g++ -std=c++11  main.o game_logic.o Board.o Piece.o -o main $(LIBS)
 
 game_logic.o: game_logic.hpp
 
 Board.o: Board.hpp
+
+Piece.o: Piece.hpp
 
 # source file dependencies
 

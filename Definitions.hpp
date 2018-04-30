@@ -3,6 +3,7 @@
 #define SCREEN_WIDTH  600
 #define SCREEN_HEIGHT 600
 
+//board
 #define BSCALE .33
 
 #define BSIZE 466*BSCALE

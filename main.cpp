@@ -4,6 +4,7 @@
 #include "Definitions.hpp"
 #include "game_logic.hpp"
 #include "Board.hpp"
+#include "Piece.hpp"
 
 
 int main()
@@ -49,11 +50,6 @@ int main()
     int col, row;
     int map_index = 0;
 
-    // Grid Texture
-    sf::Texture grid;
-    grid.setSmooth(true);
-  	grid.loadFromFile("res/images/Grid.png");
-
     // Top-Left Board
   	Board b1(SPACE, SPACE);
 
@@ -66,62 +62,11 @@ int main()
 
 ////////////////////////<<<<<< O PIECE [class] >>>>>>>//////////////////////////////
 
-    // O Texture
-    sf::Texture otexture;
-    otexture.setSmooth(true);
-    otexture.loadFromFile("res/images/O.png");
-
-    // X Texture
-    sf::Texture xtexture;
-    xtexture.setSmooth(true);
-    xtexture.loadFromFile("res/images/X.png");
-
-    // Initialize Sprites as Arrays
-    sf::Sprite o1[3][3];
-    sf::Sprite o2[3][3];
-    sf::Sprite o3[3][3];
-
-    // First Board (b1)
-    for (int x = 0; x < 3; x++)
-    {
-      for (int y = 0; y < 3; y++)
-  		{
-        o1[x][y].setScale(BSCALE,BSCALE);
-        o1[x][y].setTexture(otexture);
-        o1[x][y].setColor(sf::Color(255, 255, 255, 0)); // Change last value to 0 in order to make pieces invisible
-        o1[x][y].setPosition(b1.getBoard().getPosition().x + (PSIZE * x) - 2, b1.getBoard().getPosition().y + (PSIZE * y) - 2);     // the -2 is needed to center the Piece
-      }
-    }
-
-    // Middle Board (b2)
-    for (int x = 0; x < 3; x++)
-    {
-      for (int y = 0; y < 3; y++)
-      {
-        o2[x][y].setScale(BSCALE,BSCALE);
-        o2[x][y].setTexture(otexture);
-        o2[x][y].setColor(sf::Color(255, 255, 255, 0));
-        o2[x][y].setPosition(b2.getBoard().getPosition().x + (PSIZE * x) - 2, b2.getBoard().getPosition().y + (PSIZE * y) - 2);
-      }
-    }
-
-    // Bottom Board (b3)
-    for (int x = 0; x < 3; x++)
-    {
-      for (int y = 0; y < 3; y++)
-      {
-        o3[x][y].setScale(BSCALE,BSCALE);
-        o3[x][y].setTexture(otexture);
-        o3[x][y].setColor(sf::Color(255, 255, 255, 0));
-        o3[x][y].setPosition(b3.getBoard().getPosition().x + (PSIZE * x) - 2, b3.getBoard().getPosition().y + (PSIZE * y) - 2);
-      }
-    }
-
     //Initialize game logic
     GameLogic board;
 
 //////////////////~~~~~~~~~ Game Loop  ~~~~~~~~~//////////////////
-    while (window.isOpen())
+    while (window.isOpen()) //game class
     {
       // Event Loop    [Check each event with every iteration of loop]
       sf::Event event;
@@ -147,50 +92,35 @@ int main()
             if (event.mouseButton.button == sf::Mouse::Left)
             {
                 int map_index = 0;
-              sf::Vector2i mpos = sf::Mouse::getPosition(window);
+                sf::Vector2i mpos = sf::Mouse::getPosition(window);
 
-              // Debug statement
-              std::cout << "mpos:" << "(" << mpos.x << "," << mpos.y << std::endl;
+                // Debug statement
+                std::cout << "mpos:" << "(" << mpos.x << "," << mpos.y << std::endl;
 ////////////////////////<<<<<< LOADING SCREEN >>>>>>>//////////////////////////////
                 if(gameStart == false)
                 {
-                  std::cout << "Set to TRUE" << std::endl;
-                        gameStart = true;
+                    std::cout << "Set to TRUE" << std::endl;
+                    gameStart = true;
                 }
 ////////////////////////<<<<<< RESET button  >>>>>>>//////////////////////////////
-                else if(gameStart){
-                  if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x + RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
+                else if(gameStart) //if reset button pressed
+                {
+                    if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x + RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
                     {
-                      std::cout << "restart clicked" << std::endl;
-                          //Clear boards
-                      for (int x = 0; x < 3; x++)
-                      {
-                        for (int y = 0; y < 3; y++)
-                      {
-                       o1[x][y].setColor(sf::Color(255, 255, 255, 0));
-                       std::cout << "b1 reset" << std::endl;
-                      }
-                    }
-                    // Middle Board (b2)
-                  for (int x = 0; x < 3; x++)
-                  {
-                    for (int y = 0; y < 3; y++)
-                    {
-                      o2[x][y].setColor(sf::Color(255, 255, 255, 0));
-                      std::cout << "b2 reset" << std::endl;
-                    }
-                  }
-                  // Bottom Board (b3)
-                  for (int x = 0; x < 3; x++)
-                  {
-                    for (int y = 0; y < 3; y++)
-                    {
-                     o3[x][y].setColor(sf::Color(255, 255, 255, 0));
-                     std::cout << "b3 reset" << std::endl;
-                    }
-                  }
+                        std::cout << "restart clicked" << std::endl;
+                        //Clear boards
+                        b1.clear();
+                        std::cout << "b1 reset" << std::endl;
 
-              }
+                        // Middle Board (b2)
+                        b2.clear();
+                        std::cout << "b2 reset" << std::endl;
+
+                        // Bottom Board (b3)
+                        b3.clear();
+                        std::cout << "b3 reset" << std::endl;
+
+                    }
 
                   // First board only [i guess an inheritance thing will be going on for each board]
                   if (mpos.x > b1.getBoard().getPosition().x && mpos.x < b1.getBoard().getPosition().x + BSIZE && mpos.y > b1.getBoard().getPosition().y && mpos.y < b1.getBoard().getPosition().y + BSIZE)
@@ -240,14 +170,14 @@ int main()
                       {
                           // Change Pieces Based on Turncount
                           std::cout << "(" << col << "," << row << ")" << std::endl;
-                          o1[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                          b1.visible(col-1,row-1);
                           if (board.check_current_player() == 1)
                         {
-                          o1[col-1][row-1].setTexture(xtexture);    // If player1
+                          b1.X(col-1,row-1);    // If player1
                         }
                         else if (board.check_current_player() == 2)
                         {
-                          o1[col-1][row-1].setTexture(otexture);    // If player2
+                          b1.O(col-1,row-1);    // If player2
                         }
                           board.update_Box(map_index);
                           board.change_player_turn();
@@ -298,20 +228,20 @@ int main()
                       std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                     }
 
-
+                        //if no piece there
                       if(board.check_box(map_index) == 0)
                       {
 
                         // Change Pieces Based on Turncount
                         std::cout << "(" << col << "," << row << ")" << std::endl;
-                        o2[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                        b2.visible(col-1,row-1);
                         if (board.check_current_player() == 1)
                         {
-                          o2[col-1][row-1].setTexture(xtexture);    // If player1
+                          b2.X(col-1,row-1);    // If player1
                         }
                         else if (board.check_current_player() == 2)
                         {
-                          o2[col-1][row-1].setTexture(otexture);    // If player2
+                          b2.O(col-1,row-1);    // If player2
                         }
                           board.update_Box(map_index);
                           board.change_player_turn();
@@ -365,15 +295,15 @@ int main()
                       {
                         // Change Pieces Based on Turncount
                         std::cout << "(" << col << "," << row << ")" << std::endl;
-                        o3[col-1][row-1].setColor(sf::Color(255, 255, 255, 255));
+                        b3.visible(col-1,row-1);
                         if (board.check_current_player() == 1)
                         {
-                          o3[col-1][row-1].setTexture(xtexture);    // If player1
+                          b3.X(col-1,row-1);    // If player1
 
                         }
                         else if (board.check_current_player() == 2)
                         {
-                          o3[col-1][row-1].setTexture(otexture);    // If player2
+                          b3.O(col-1,row-1);   // If player2
 
                         }
                           board.update_Box(map_index);
@@ -406,40 +336,15 @@ int main()
                    window.draw(sTitle);
             }
 
-            else {
+            else
+            {
                   // Draw the Restart Button
                   window.draw(resbut);
 
-                  // Draw the Grids [function]
+                  // Draw the Grids and pieces [function]
                   b1.draw(window);
                   b2.draw(window);
                   b3.draw(window);
-
-              /// Initialize the Pieces [function]
-                  // Top Board (b1)
-                  for (int x = 0; x < 3; x++)
-                      {
-                          for (int y = 0; y < 3; y++)
-                          {
-                        window.draw(o1[x][y]);
-                          }
-                      }
-                  // Middle Board (b2)
-                  for (int x = 0; x < 3; x++)
-                  {
-                    for (int y = 0; y < 3; y++)
-                    {
-                        window.draw(o2[x][y]);
-                    }
-                  }
-                  // Bottom Board (b3)
-                  for (int x = 0; x < 3; x++)
-                  {
-                    for (int y = 0; y < 3; y++)
-                    {
-                        window.draw(o3[x][y]);
-                    }
-                  }
             }
 
             // Redraws the Display
