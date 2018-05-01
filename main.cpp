@@ -13,6 +13,26 @@ int main()
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
 //int turncount(1)
+////////////////////////<<<<<< TURN FONTS >>>>>>>//////////////////////////////
+    sf::Font font;
+    if (!font.loadFromFile("res/fonts/Marker Felt.ttf"))
+    {
+        std::cout << "FONT ERROR" << std::endl;
+    }
+
+    sf::Text xtext, otext;
+    xtext.setFont(font);
+    xtext.setString("X Turn!");
+    xtext.setCharacterSize(50);
+    xtext.setColor(sf::Color(255, 255, 255, 255));
+    xtext.setPosition(456,40);
+
+    otext.setFont(font);
+    otext.setString("O Turn!");
+    otext.setCharacterSize(50);
+    otext.setColor(sf::Color(255, 255, 255, 255));
+    xtext.setPosition(456,40);
+
 
 ////////////////////////<<<<<< Home Screen Declaration] >>>>>>>/////////////////
     //title initiliaze start
@@ -336,7 +356,6 @@ int main()
 
 
 ///////////////<<<<<<<<<<<<< Draw everything here >>>>>>>>>>>>>>>///////////////
-
         if(gameStart == false)
         {
             std::cout << "Game Start = false" << std::endl;
@@ -344,6 +363,16 @@ int main()
         }
         else    //update graphics
         {
+          if(board.check_current_player() == 1)
+          {
+            std::cout << "X Turn" << std::endl;
+            window.draw(xtext);
+          }
+          if(board.check_current_player() == 2)
+          {
+            std::cout << "O Turn" << std::endl;
+            window.draw(otext);
+          }
             // Draw the Restart Button
             window.draw(resbut);
 
@@ -352,6 +381,7 @@ int main()
             b2.draw(window);
             b3.draw(window);
         }
+
 
         // Redraws the Display
         window.display();
