@@ -6,6 +6,7 @@
 #include "game_logic.hpp"
 #include "Board.hpp"
 #include "Piece.hpp"
+#include "Texts.hpp"
 
 
 int main()
@@ -15,13 +16,21 @@ int main()
 
 //int turncount(1)
 ////////////////////////<<<<<< TURN FONTS >>>>>>>//////////////////////////////
-    sf::Font font;
+/*    sf::Font font;
     if (!font.loadFromFile("res/fonts/Marker Felt.ttf"))
     {
         std::cout << "FONT ERROR" << std::endl;
     }
 
     sf::Text xtext, otext, xwin, owin;
+*/
+
+    Texts xtext("X Turn");
+    Texts otext("O Turn");
+    Texts xwin("X Wins!");
+    Texts owin("O Wins!");
+
+/*
     xtext.setFont(font);
     xtext.setString("X Turn!");
     xtext.setCharacterSize(50);
@@ -45,6 +54,7 @@ int main()
     owin.setCharacterSize(50);
     owin.setColor(sf::Color(54, 57, 67, 255));
     owin.setPosition(420,15);
+*/
 
 
 ////////////////////////<<<<<< SOUND EFFECTS >>>>>>>//////////////////////////////
@@ -86,8 +96,6 @@ int main()
     resbut.setTexture(restart);
     resbut.setPosition(SPACE/2, SCREEN_HEIGHT - RESTART_SIZE - SPACE/2);
     //Restart button initilization end
-
-
 
 ////////////////////////<<<<<< GRID [class] >>>>>>>//////////////////////////////
     // variables for mouse input
@@ -393,22 +401,26 @@ int main()
           if(board.check_current_player() == 1)
           {
             //std::cout << "X Turn" << std::endl;
-            window.draw(xtext);
+            xtext.draw(window);
+            //window.draw(xtext);
           }
           if(board.check_current_player() == 2)
           {
             //std::cout << "O Turn" << std::endl;
-            window.draw(otext);
+            otext.draw(window);
+            //window.draw(otext);
           }
           if(board.check_win() == 1)
           {
             window.clear(sf::Color(187,225,254));
-            window.draw(xwin);
+            xwin.draw(window);
+            //window.draw(xwin);
           }
           else if(board.check_win() == -1)
           {
             window.clear(sf::Color(187,225,254));
-            window.draw(owin);
+            owin.draw(window);
+            //window.draw(owin);
           }
             // Draw the Restart Button
             window.draw(resbut);
