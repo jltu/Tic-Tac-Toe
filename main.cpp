@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Definitions.hpp"
 #include "game_logic.hpp"
 #include "Board.hpp"
@@ -20,7 +21,7 @@ int main()
         std::cout << "FONT ERROR" << std::endl;
     }
 
-    sf::Text xtext, otext;
+    sf::Text xtext, otext, xwin, owin;
     xtext.setFont(font);
     xtext.setString("X Turn!");
     xtext.setCharacterSize(50);
@@ -33,6 +34,27 @@ int main()
     otext.setColor(sf::Color(54, 57, 67, 255));
     otext.setPosition(420,15);
 
+    xwin.setFont(font);
+    xwin.setString("X Wins!");
+    xwin.setCharacterSize(50);
+    xwin.setColor(sf::Color(54, 57, 67, 255));
+    xwin.setPosition(420,15);
+
+    owin.setFont(font);
+    owin.setString("O Wins!");
+    owin.setCharacterSize(50);
+    owin.setColor(sf::Color(54, 57, 67, 255));
+    owin.setPosition(420,15);
+
+
+////////////////////////<<<<<< SOUND EFFECTS >>>>>>>//////////////////////////////
+    sf::SoundBuffer buffer;
+    if(!buffer.loadFromFile("res/sounds/Bloop.wav"))
+    {
+      std::cout << "Sound ERROR" << std::endl;
+    }
+    sf::Sound sound;
+    sound.setBuffer(buffer);
 
 ////////////////////////<<<<<< Home Screen Declaration] >>>>>>>/////////////////
     //title initiliaze start
@@ -193,6 +215,8 @@ int main()
 
                                 if(board.check_box(map_index) == 0)
                                 {
+                                    sound.play();
+                                    std::cout << "SOUND PLAY" << std::endl;
                                     // Change Pieces Based on Turncount
                                     std::cout << "(" << col << "," << row << ")" << std::endl;
                                     b1.visible(col-1,row-1);
@@ -256,7 +280,8 @@ int main()
 
                                 //if no piece there
                                 if(board.check_box(map_index) == 0)
-                                {
+                                {   sound.play();
+                                    std::cout << "SOUND PLAY" << std::endl;
                                     // Change Pieces Based on Turncount
                                     std::cout << "(" << col << "," << row << ")" << std::endl;
                                     b2.visible(col-1,row-1);
@@ -320,6 +345,8 @@ int main()
 
                                 if(board.check_box(map_index) == 0)
                                 {
+                                    sound.play();
+                                    std::cout << "SOUND PLAY" << std::endl;
                                     // Change Pieces Based on Turncount
                                     std::cout << "(" << col << "," << row << ")" << std::endl;
                                     b3.visible(col-1,row-1);
@@ -358,20 +385,30 @@ int main()
 ///////////////<<<<<<<<<<<<< Draw everything here >>>>>>>>>>>>>>>///////////////
         if(gameStart == false)
         {
-            std::cout << "Game Start = false" << std::endl;
+            //std::cout << "Game Start = false" << std::endl;
             window.draw(sTitle);
         }
         else    //update graphics
         {
           if(board.check_current_player() == 1)
           {
-            std::cout << "X Turn" << std::endl;
+            //std::cout << "X Turn" << std::endl;
             window.draw(xtext);
           }
           if(board.check_current_player() == 2)
           {
-            std::cout << "O Turn" << std::endl;
+            //std::cout << "O Turn" << std::endl;
             window.draw(otext);
+          }
+          if(board.check_win() == 1)
+          {
+            window.clear(sf::Color(187,225,254));
+            window.draw(xwin);
+          }
+          else if(board.check_win() == -1)
+          {
+            window.clear(sf::Color(187,225,254));
+            window.draw(owin);
           }
             // Draw the Restart Button
             window.draw(resbut);

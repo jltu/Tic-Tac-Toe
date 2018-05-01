@@ -1,4 +1,4 @@
-LIBS=-lsfml-graphics -lsfml-window -lsfml-system
+LIBS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 main: main.o game_logic.o Board.o Piece.o
 	g++ -std=c++11  main.o game_logic.o Board.o Piece.o -o main $(LIBS)
