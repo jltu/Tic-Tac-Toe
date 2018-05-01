@@ -11,7 +11,7 @@ Texts::Texts(std::string word)
   text.setString(word);
   text.setCharacterSize(50);
   text.setColor(sf::Color(54, 57, 67, 255));
-  text.setPosition(440,15);
+  text.setPosition(430,15);
 }
 
 void Texts::draw(sf::RenderWindow &window)

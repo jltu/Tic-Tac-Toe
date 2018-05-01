@@ -14,6 +14,13 @@ int main()
     // Create window, the style makes it so you can't resize the window
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
+    sf::Music music;
+    if(!music.openFromFile("res/sounds/Background_music.ogg"))
+    {
+      std::cout << "Sound ERROR" << std::endl;
+    }
+
+    music.play();
 //int turncount(1)
 ////////////////////////<<<<<< TURN FONTS >>>>>>>//////////////////////////////
 /*    sf::Font font;
@@ -63,6 +70,7 @@ int main()
     {
       std::cout << "Sound ERROR" << std::endl;
     }
+
     sf::Sound sound;
     sound.setBuffer(buffer);
 
