@@ -24,14 +24,14 @@ int main()
     xtext.setFont(font);
     xtext.setString("X Turn!");
     xtext.setCharacterSize(50);
-    xtext.setColor(sf::Color(255, 255, 255, 255));
-    xtext.setPosition(456,40);
+    xtext.setColor(sf::Color(54, 57, 67, 255));
+    xtext.setPosition(420,15);
 
     otext.setFont(font);
     otext.setString("O Turn!");
     otext.setCharacterSize(50);
-    otext.setColor(sf::Color(255, 255, 255, 255));
-    xtext.setPosition(456,40);
+    otext.setColor(sf::Color(54, 57, 67, 255));
+    otext.setPosition(420,15);
 
 
 ////////////////////////<<<<<< Home Screen Declaration] >>>>>>>/////////////////
