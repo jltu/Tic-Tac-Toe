@@ -16,11 +16,9 @@ int main()
 
 ////////////////////////<<<<<< Home Screen Declaration] >>>>>>>/////////////////
     //title initiliaze start
-    sf::Texture title, background;
+    sf::Texture title;
     title.setSmooth(true);
     title.loadFromFile("res/images/Game Title.png");
-
-    background.loadFromFile("res/images/Background.png");
 
     sf::Sprite sTitle;
     sTitle.setScale(1,1);
@@ -107,7 +105,7 @@ int main()
                         }
 ////////////////////////<<<<<< Running Game  >>>>>>>//////////////////////////////
                         else if(gameStart)
-                        {   //takes in resbut, window, mpos, gamelogic, board 
+                        {   //takes in resbut, window, mpos, gamelogic, board
                             if (resbut.getGlobalBounds().contains(window.mapPixelToCoords(mpos)))
                             //if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x +
                             // RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
