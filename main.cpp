@@ -53,18 +53,6 @@ int main()
 ////////////////////////<<<<<< Restart Button >>>>>>>///////////////////////////
 
     Button resbut(SPACE/2, SCREEN_HEIGHT - RESTART_SIZE - SPACE/2);
-    /*//Restart button initialization start
-    // Restart Button texture
-    sf::Texture restart;
-    restart.setSmooth(true);
-    restart.loadFromFile("res/images/Restart.png");
-
-    // Initialize Restart Button
-    sf::Sprite resbut;
-    resbut.setScale(RESTART_SCALE,RESTART_SCALE);
-    resbut.setTexture(restart);
-    resbut.setPosition(SPACE/2, SCREEN_HEIGHT - RESTART_SIZE - SPACE/2);
-    //Restart button initilization end */
 
 ////////////////////////<<<<<< GRID [class] >>>>>>>//////////////////////////////
     // variables for mouse input
@@ -400,8 +388,9 @@ int main()
             b3.draw(window);
         }
 
-
         // Redraws the Display
         window.display();
-    }//end game loop
+
+    } //end game loop
+
 }
