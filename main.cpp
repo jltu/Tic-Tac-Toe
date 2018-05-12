@@ -9,7 +9,6 @@
 #include "Title.hpp"
 #include "Button.hpp"
 
-
 int main()
 {
     // Create the window (the style makes it so you can't resize the window)
@@ -137,7 +136,7 @@ int main()
                                 std::cout << "b3 reset" << std::endl;
                             }
 
-//board 1                   // First board only [i guess an inheritance thing will be going on for each board]
+//board 1                   // First board only
                             if (mpos.x > b1.getBoard().getPosition().x && mpos.x < b1.getBoard().getPosition().x +
                              BSIZE && mpos.y > b1.getBoard().getPosition().y && mpos.y < b1.getBoard().getPosition().y + BSIZE)
                             {
@@ -181,7 +180,7 @@ int main()
                                     std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                                 }
 
-
+                                //if no piece there
                                 if(board.check_box(map_index) == 0)
                                 {
                                     sound.play();
@@ -312,6 +311,7 @@ int main()
                                     std::cout << "row3:" << "(" << mpos.x << "," << mpos.y << std::endl;
                                 }
 
+                                //if no piece there
                                 if(board.check_box(map_index) == 0)
                                 {
                                     sound.play();
