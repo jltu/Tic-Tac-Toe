@@ -1,9 +1,9 @@
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
-main: main.o game_logic.o Board.o Piece.o Texts.o Title.o Button.o
-	g++ -std=c++11  main.o game_logic.o Board.o Piece.o Texts.o Title.o Button.o -o main $(LIBS)
+main: main.o GameLogic.o Board.o Piece.o Texts.o Title.o Button.o
+	g++ -std=c++11  main.o GameLogic.o Board.o Piece.o Texts.o Title.o Button.o -o main $(LIBS)
 
-game_logic.o: game_logic.hpp
+GameLogic.o: GameLogic.hpp
 
 Board.o: Board.hpp
 

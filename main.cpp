@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Definitions.hpp"
-#include "game_logic.hpp"
+#include "GameLogic.hpp"
 #include "Board.hpp"
 #include "Texts.hpp"
 #include "Title.hpp"
@@ -12,10 +12,11 @@
 
 int main()
 {
-    // Create window, the style makes it so you can't resize the window
-  	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
+    // Create the window (the style makes it so you can't resize the window)
+  	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT),
+        " \"3D\" Tic-Tac-Toe",sf::Style::Close);
 
-////////////////////////<<<<<< BACKGROUND MUSIC >>>>>>>////////////////////////
+    ////////////////////////<<<<<< BACKGROUND MUSIC >>>>>>>/////////////////////
 
     sf::Music music;
     if(!music.openFromFile("res/sounds/Background_music.ogg"))
@@ -25,14 +26,15 @@ int main()
 
     music.play();
 
-////////////////////////<<<<<< TURN FONTS >>>>>>>//////////////////////////////
+    ////////////////////////<<<<<< TURN TEXT >>>>>>>////////////////////////////
 
     Texts xtext("X Turn");
     Texts otext("O Turn");
     Texts xwin("X Wins!");
     Texts owin("O Wins!");
 
-////////////////////////<<<<<< SOUND EFFECTS >>>>>>>//////////////////////////////
+    ////////////////////////<<<<<< SOUND EFFECTS >>>>>>>////////////////////////
+
     sf::SoundBuffer buffer;
     if(!buffer.loadFromFile("res/sounds/Bloop.wav"))
     {
@@ -42,7 +44,7 @@ int main()
     sf::Sound sound;
     sound.setBuffer(buffer);
 
-////////////////////////<<<<<< Home Screen Declaration] >>>>>>>/////////////////
+    ////////////////////////<<<<<< Home Screen Declaration >>>>>>>//////////////
 
     //title initiliaze
     Title title(SCREEN_WIDTH/2 - (410)/2, SCREEN_HEIGHT/2 - (300)/2);
@@ -50,16 +52,18 @@ int main()
     //determines if game will start
     bool gameStart = false;
 
-////////////////////////<<<<<< Restart Button >>>>>>>///////////////////////////
+    ////////////////////////<<<<<< Restart Button >>>>>>>///////////////////////
 
     Button resbut(SPACE/2, SCREEN_HEIGHT - RESTART_SIZE - SPACE/2);
 
-////////////////////////<<<<<< GRID [class] >>>>>>>//////////////////////////////
-    // variables for mouse input
+    //////////////////<<<<<< Mouse Input & Board Declaration >>>>>>>////////////
+
+    //variables for mouse input
     int col, row;
     int map_index = 0;
 
     //initiliaze boards
+
     // Top-Left Board
   	Board b1(SPACE, SPACE);
     // Centered Board
@@ -68,13 +72,13 @@ int main()
     Board b3(SCREEN_WIDTH - BSIZE - SPACE, SCREEN_HEIGHT - BSIZE - SPACE);
 
 
-////////////////////////<<<<<< O PIECE [class] >>>>>>>//////////////////////////
+    ///////////////////////<<<<<< O PIECE [class] >>>>>>>///////////////////////
 
     //Initialize game logic
     GameLogic board;
 
-////////////////////////~~~~~~~~~ Game Loop  ~~~~~~~~~/////////////////////////
-    while (window.isOpen()) //game class
+    ////////////////////////~~~~~~~~~ Game Loop  ~~~~~~~~~//////////////////////
+    while (window.isOpen())
     {
         // Event Loop    [Check each event with every iteration of loop]
         sf::Event event;
