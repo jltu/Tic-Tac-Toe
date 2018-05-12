@@ -5,14 +5,17 @@
 #include "Definitions.hpp"
 #include "game_logic.hpp"
 #include "Board.hpp"
-#include "Piece.hpp"
 #include "Texts.hpp"
+#include "Title.hpp"
+#include "Button.hpp"
 
 
 int main()
 {
     // Create window, the style makes it so you can't resize the window
   	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), " \"3D\" Tic-Tac-Toe",sf::Style::Close);
+
+////////////////////////<<<<<< BACKGROUND MUSIC >>>>>>>////////////////////////
 
     sf::Music music;
     if(!music.openFromFile("res/sounds/Background_music.ogg"))
@@ -21,48 +24,13 @@ int main()
     }
 
     music.play();
-//int turncount(1)
-////////////////////////<<<<<< TURN FONTS >>>>>>>//////////////////////////////
-/*    sf::Font font;
-    if (!font.loadFromFile("res/fonts/Marker Felt.ttf"))
-    {
-        std::cout << "FONT ERROR" << std::endl;
-    }
 
-    sf::Text xtext, otext, xwin, owin;
-*/
+////////////////////////<<<<<< TURN FONTS >>>>>>>//////////////////////////////
 
     Texts xtext("X Turn");
     Texts otext("O Turn");
     Texts xwin("X Wins!");
     Texts owin("O Wins!");
-
-/*
-    xtext.setFont(font);
-    xtext.setString("X Turn!");
-    xtext.setCharacterSize(50);
-    xtext.setColor(sf::Color(54, 57, 67, 255));
-    xtext.setPosition(420,15);
-
-    otext.setFont(font);
-    otext.setString("O Turn!");
-    otext.setCharacterSize(50);
-    otext.setColor(sf::Color(54, 57, 67, 255));
-    otext.setPosition(420,15);
-
-    xwin.setFont(font);
-    xwin.setString("X Wins!");
-    xwin.setCharacterSize(50);
-    xwin.setColor(sf::Color(54, 57, 67, 255));
-    xwin.setPosition(420,15);
-
-    owin.setFont(font);
-    owin.setString("O Wins!");
-    owin.setCharacterSize(50);
-    owin.setColor(sf::Color(54, 57, 67, 255));
-    owin.setPosition(420,15);
-*/
-
 
 ////////////////////////<<<<<< SOUND EFFECTS >>>>>>>//////////////////////////////
     sf::SoundBuffer buffer;
@@ -75,24 +43,17 @@ int main()
     sound.setBuffer(buffer);
 
 ////////////////////////<<<<<< Home Screen Declaration] >>>>>>>/////////////////
-    //title initiliaze start
-    sf::Texture title;
-    title.setSmooth(true);
-    title.loadFromFile("res/images/Game Title.png");
 
-    sf::Sprite sTitle;
-    sTitle.setScale(1,1);
-    sTitle.setTexture(title);
-    sTitle.setPosition(SCREEN_WIDTH/2 - (410)/2, SCREEN_HEIGHT/2 - (300)/2);
-    //title initialize end
+    //title initiliaze
+    Title title(SCREEN_WIDTH/2 - (410)/2, SCREEN_HEIGHT/2 - (300)/2);
 
     //determines if game will start
     bool gameStart = false;
 
-
 ////////////////////////<<<<<< Restart Button >>>>>>>///////////////////////////
 
-    //Restart button initialization start
+    Button resbut(SPACE/2, SCREEN_HEIGHT - RESTART_SIZE - SPACE/2);
+    /*//Restart button initialization start
     // Restart Button texture
     sf::Texture restart;
     restart.setSmooth(true);
@@ -103,7 +64,7 @@ int main()
     resbut.setScale(RESTART_SCALE,RESTART_SCALE);
     resbut.setTexture(restart);
     resbut.setPosition(SPACE/2, SCREEN_HEIGHT - RESTART_SIZE - SPACE/2);
-    //Restart button initilization end
+    //Restart button initilization end */
 
 ////////////////////////<<<<<< GRID [class] >>>>>>>//////////////////////////////
     // variables for mouse input
@@ -164,7 +125,7 @@ int main()
 ////////////////////////<<<<<< Running Game  >>>>>>>//////////////////////////////
                         else if(gameStart)
                         {   //takes in resbut, window, mpos, gamelogic, board
-                            if (resbut.getGlobalBounds().contains(window.mapPixelToCoords(mpos)))
+                            if (resbut.getButton().getGlobalBounds().contains(window.mapPixelToCoords(mpos)))
                             //if (mpos.x > resbut.getPosition().x && mpos.x < resbut.getPosition().x +
                             // RESTART_SIZE && mpos.y > resbut.getPosition().y && mpos.y < resbut.getPosition().y + RESTART_SIZE)
                             {   //if restart button pressed, clear boards and reset board logic
@@ -402,7 +363,7 @@ int main()
         if(gameStart == false)
         {
             //std::cout << "Game Start = false" << std::endl;
-            window.draw(sTitle);
+            title.draw(window);
         }
         else    //update graphics
         {
@@ -431,7 +392,7 @@ int main()
             //window.draw(owin);
           }
             // Draw the Restart Button
-            window.draw(resbut);
+            resbut.draw(window);
 
             // Draw the Grids and pieces [function]
             b1.draw(window);
